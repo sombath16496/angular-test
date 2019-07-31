@@ -1,0 +1,45 @@
+<div class="tag-container">
+  <h2>Addcash test assignment</h2>
+  <!-- <div class="row"> -->
+    <label>Type tags here using comma, semicolon, and line break as delimiters:</label>
+  <!-- </div> -->
+  <div class="row">
+    <textarea #unAddedTagsBox id="un-Added-Tags-Box" (input)="storeUnAddedTagsStrFromInput(unAddedTagsBox.value)" [value]="unAddedTagsStr"></textarea>
+  </div>
+  <div class="row">
+    <!-- (click) passes input value to add() and then clears the input -->
+    <button (click)="addTags(unAddedTagsBox.value); unAddedTagsBox.value=''" class="btn btn-primary" >
+      Add tags
+    </button>
+  </div>
+  <div>
+    <ul class="tags" >
+      <li [className]="tag > 0 ? 'btn btn-danger' : 'btn btn-info'" *ngFor="let tag of existingTagsArr; index as i;">
+        <a>
+          {{ tag }}
+        </a>
+        <a (click)="delete(i)">x</a>
+      </li>
+    </ul>
+  </div>
+  <div>
+    <button class="btn btn-primary" (click)="editTags(content)">
+      Edit tags
+    </button>
+  </div>
+</div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Edit tags</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+      <textarea #editTagsBox id="edit-Tags-Box" [value]="editTagsStr"></textarea>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="saveEditTags(editTagsBox.value)">Save</button>
+  </div>
+</ng-template>
